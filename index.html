@@ -18,6 +18,7 @@
 
 </body>
 <script>
+let currentID = 0;
 
  // let global = fetch(movieUrl)
  function loadReviewsA() {
@@ -32,7 +33,7 @@
 				 let rating = data.rating;
 				 let director = data.director;
 				 let plot = data.plot;
-				 $(`#reviewBlock`).append(`<div class="row">
+				 $(`#reviewBlock`).append(`<div class="row click-me" id="${data.id}">
 											<div class="col-7">
 												<div class="row">
 													${title}
@@ -53,6 +54,13 @@
 										</div>`)
 			 })
 
+		 })
+		 .then(()=>{
+			 $(`.click-me`).click(function (event){
+				 console.log(event);
+				 currentID =  $(this).attr('id');
+				 console.log(currentID);
+			 });
 		 })
  }
 
@@ -112,6 +120,9 @@
 <script src="js/requests.js"></script>
 <script>
 	emptyClean();
+	loadReviewsA();
+
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
