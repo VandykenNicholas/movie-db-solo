@@ -19,100 +19,18 @@
 </body>
 <script>
 let currentID = 0;
-
- // let global = fetch(movieUrl)
- function loadReviewsA() {
+ function loadReviews(style) {
 	 fetch(`${movieUrl}`)
 		 .then((response) => response.json())
 		 // .then((data) => data.sort((a, b) => a.title.localeCompare(b.title)))
 		 .then((data) => {
-			 data.forEach(data => {
-				 let title = data.title;
-				 console.log(typeof data.title, data.title)
-				 let genre = data.genre;
-				 let rating = data.rating;
-				 let director = data.director;
-				 let plot = data.plot;
-				 $(`#reviewBlock`).append(`<div class="row click-me" id="${data.id}">
-											<div class="col-7">
-												<div class="row">
-													${title}
-												</div>
-												<div class="row">
-													${plot}
-												</div>
-												<div class="row">
-													${genre}
-												</div>
-												<div class="row">
-													${director}
-												</div>
-											</div>
-											<div class="col">
-													${rating}
-											</div>
-										</div>`)
-			 })
-
+			 ////// raw, alpha, alphaR, rating, ratingR //////
+			 printData(data, style)
 		 })
-		 .then(()=>{
-			 $(`.click-me`).click(function (event){
-				 console.log(event);
-				 currentID =  $(this).attr('id');
-				 console.log(currentID);
-			 });
-		 })
+		 .then(() => {
+			 updateEventHandler();
+		 });
  }
-
-
-
-
-
- ///// duplicates ////
-	 // .then ((data) => {
-		// data.sort(function(a, b) {
-		// 	 let textA = a.title.toUpperCase();
-		// 	 let textB = b.title.toUpperCase();
-		// 	 return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
-		//  });
-	 // })
- ///////////////////
-
-	 // .then((clean) => clean.filter((e, i, a) => a.indexOf(e) !== i))
-	    // .then((data) => data.map(data => data.id))
-        // .then((data) => data.map(data => String(data)))
-        // .then((results) => {
-		// 	results.forEach(f => fetch(`${movieUrl}${f}`,{method: `DELETE`,headers: {
-		// 			'Content-Type': 'application/json',
-		// 		}}))
- // })
-
- // let cleanTest = fetch(`${movieUrl}`,{method: `DELETE`,headers: {
-	// 	 'Content-Type': 'application/json',
-	//  }});
-
-
-
-
-
- //     .then((data) => {
-	// 		return data[0];
-	//     })
- //        .then((response) =>{ fetch(movieUrl, {
-	// 	 method: 'DELETE',
-	// 	 headers: {
-	// 		 'Content-Type': 'application/json'
-	// 	 },
-	// 	 body: JSON.stringify(`"id": ${response}`)
-	//  })
-	// 	 .then((result) => result)
- // })
-	//  .catch( error => console.error(error) );
-
-
-
-
-
 
 
 
@@ -120,7 +38,7 @@ let currentID = 0;
 <script src="js/requests.js"></script>
 <script>
 	emptyClean();
-	loadReviewsA();
+	loadReviews();
 
 
 </script>
