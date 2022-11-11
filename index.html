@@ -5,25 +5,113 @@
 	<title>Best Review Site</title>
 	<script src="js/jquery.js"></script>
 	<script src="js/keys.js"></script>
-	<script src="js/requests.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
 	      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
 </head>
 <body>
+<div class="container" id="reviewBlock">
 
+</div>
 
 
 
 </body>
 <script>
 
-	fetch(movieUrl)
-		.then((response) => response.json())
-		.then((data) => data.filter(data => data.title = 1 || !data.title))
-	    .then((data) => console.log(data));
+ // let global = fetch(movieUrl)
+ function loadReviewsA() {
+	 fetch(`${movieUrl}`)
+		 .then((response) => response.json())
+		 // .then((data) => data.sort((a, b) => a.title.localeCompare(b.title)))
+		 .then((data) => {
+			 data.forEach(data => {
+				 let title = data.title;
+				 console.log(typeof data.title, data.title)
+				 let genre = data.genre;
+				 let rating = data.rating;
+				 let director = data.director;
+				 let plot = data.plot;
+				 $(`#reviewBlock`).append(`<div class="row">
+											<div class="col-7">
+												<div class="row">
+													${title}
+												</div>
+												<div class="row">
+													${plot}
+												</div>
+												<div class="row">
+													${genre}
+												</div>
+												<div class="row">
+													${director}
+												</div>
+											</div>
+											<div class="col">
+													${rating}
+											</div>
+										</div>`)
+			 })
+
+		 })
+ }
 
 
+
+
+
+ ///// duplicates ////
+	 // .then ((data) => {
+		// data.sort(function(a, b) {
+		// 	 let textA = a.title.toUpperCase();
+		// 	 let textB = b.title.toUpperCase();
+		// 	 return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+		//  });
+	 // })
+ ///////////////////
+
+	 // .then((clean) => clean.filter((e, i, a) => a.indexOf(e) !== i))
+	    // .then((data) => data.map(data => data.id))
+        // .then((data) => data.map(data => String(data)))
+        // .then((results) => {
+		// 	results.forEach(f => fetch(`${movieUrl}${f}`,{method: `DELETE`,headers: {
+		// 			'Content-Type': 'application/json',
+		// 		}}))
+ // })
+
+ // let cleanTest = fetch(`${movieUrl}`,{method: `DELETE`,headers: {
+	// 	 'Content-Type': 'application/json',
+	//  }});
+
+
+
+
+
+ //     .then((data) => {
+	// 		return data[0];
+	//     })
+ //        .then((response) =>{ fetch(movieUrl, {
+	// 	 method: 'DELETE',
+	// 	 headers: {
+	// 		 'Content-Type': 'application/json'
+	// 	 },
+	// 	 body: JSON.stringify(`"id": ${response}`)
+	//  })
+	// 	 .then((result) => result)
+ // })
+	//  .catch( error => console.error(error) );
+
+
+
+
+
+
+
+
+</script>
+<script src="js/requests.js"></script>
+<script>
+	emptyClean();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
