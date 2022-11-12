@@ -50,38 +50,43 @@
 	let currentID = 0;
 	let info = loadReviews();
 	info.then((info) => printData(info, `raw`));
-	console.log(info);
 
 
 	function uniqueId(){
-		return fetch(`${movieUrl}`)
+	return	 fetch(`${movieUrl}`)
 		.then((response) => response.json())
 		.then((data) => data.map(data => data.id))
 		.then((d) => d.sort())
 		.then((d) => d[d.length-1]+1)
-		.then((d) => d)
+		.then((d) =>{
+			return d
+		} );
+
 	}
 	$(`#send`).click(function(){
 		let index = uniqueId();
-		const reviewObj = {
-			id: 1,
-			name: 'Test2',
-			rating: 3,
-			plot: "test 4",
-			director: `joe momma's daddy`
-		};
-		const url = movieUrl;
-		const options = {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(reviewObj),
-		};
-		fetch(url, options)
-			.then( response => console.log(response) ) /* review was created successfully */
-			.catch( error => console.error(error) ); /* handle errors */
-	})
+		index.then((id) =>{
+			const reviewObj = {
+				id: id,
+				title: 'Test10',
+				rating: 5,
+				plot: "test 4",
+				director: `id check`
+			};
+			const url = movieUrl;
+			const options = {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(reviewObj),
+			};
+			fetch(url, options)
+				.then( response => console.log(response) ) /* review was created successfully */
+				.catch( error => console.error(error) ); /* handle errors */
+		})
+		})
+
 
 
 </script>

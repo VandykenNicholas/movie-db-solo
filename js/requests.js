@@ -112,9 +112,7 @@ function printData(data, style){
 	updateEventHandler();
 	return data;
 }
-function startApp(){
 
-}
 function loadReviews() {
 	return fetch(`${movieUrl}`)
 		.then((response) => response.json())
