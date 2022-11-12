@@ -81,13 +81,13 @@ function printData(data, style){
 			return 0;
 		})
 	}
+	$(`#reviewBlock`).replaceWith(`<div class="container" id="reviewBlock"></div>`)
 	data.forEach(data => {
 		let title = data.title;
 		let genre = data.genre;
 		let rating = data.rating;
 		let director = data.director;
 		let plot = data.plot;
-		$(`#reviewBlock`).replaceWith(`<div class="container" id="reviewBlock"></div>`)
 			$(`#reviewBlock`).append(`<div class="row click-me" id="${data.id}">
 											<div class="col-7">
 												<div class="row">

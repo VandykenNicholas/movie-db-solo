@@ -47,20 +47,41 @@
 <script src="js/requests.js"></script>
 <script>
 	// emptyClean();
-	let globalData =[]
 	let currentID = 0;
 	let info = loadReviews();
 	info.then((info) => printData(info, `raw`));
-	info.then((data)=> globalData = data);
 	console.log(info);
 
-	function testUniqeId(){
-		let idIndex = globalData.map(d => d.id)
-		idIndex = idIndex.sort();
-		console.log(idIndex[idIndex.length-1]+1);
-		return idIndex[idIndex-1]+1;
+
+	function uniqueId(){
+		return fetch(`${movieUrl}`)
+		.then((response) => response.json())
+		.then((data) => data.map(data => data.id))
+		.then((d) => d.sort())
+		.then((d) => d[d.length-1]+1)
+		.then((d) => d)
 	}
-	$(`#send`).click(testUniqeId)
+	$(`#send`).click(function(){
+		let index = uniqueId();
+		const reviewObj = {
+			id: 1,
+			name: 'Test2',
+			rating: 3,
+			plot: "test 4",
+			director: `joe momma's daddy`
+		};
+		const url = movieUrl;
+		const options = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(reviewObj),
+		};
+		fetch(url, options)
+			.then( response => console.log(response) ) /* review was created successfully */
+			.catch( error => console.error(error) ); /* handle errors */
+	})
 
 
 </script>
