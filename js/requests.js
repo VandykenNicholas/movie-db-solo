@@ -32,6 +32,7 @@ function emptyClean() {
 function updateEventHandler(){
 	$(`.click-me`).click(function (event){
 		currentID =  $(this).attr('id');
+		console.log(currentID);
 	});
 }
 
@@ -86,6 +87,7 @@ function printData(data, style){
 		let rating = data.rating;
 		let director = data.director;
 		let plot = data.plot;
+		$(`#reviewBlock`).replaceWith(`<div class="container" id="reviewBlock"></div>`)
 			$(`#reviewBlock`).append(`<div class="row click-me" id="${data.id}">
 											<div class="col-7">
 												<div class="row">
@@ -107,5 +109,16 @@ function printData(data, style){
 										</div>`)
 
 	})
+	updateEventHandler();
 	return data;
+}
+function startApp(){
+
+}
+function loadReviews() {
+	return fetch(`${movieUrl}`)
+		.then((response) => response.json())
+		.then((data) => {
+			return data
+		})
 }

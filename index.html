@@ -13,32 +13,54 @@
 <div class="container" id="reviewBlock">
 
 </div>
-
+<div class="container" id="common">
+	<form class="row g-3">
+		<div class="col-auto">
+			<label for="title" class="">Title</label>
+			<input type="text" class="form-control" id="title" placeholder="title">
+		</div>
+		<div class="col-auto">
+			<label for="genre" class="">genre</label>
+			<input type="text"  class="form-control" id="genre" placeholder="genre">
+		</div>
+		<div class="col-auto">
+			<label for="rating" class="">rating</label>
+			<input type="number" max="5" min="0" class="form-control" id="rating" placeholder="rating">
+		</div>
+		<div class="col-auto">
+			<label for="director" class="">movie</label>
+			<input type="text"  class="form-control" id="director" placeholder="director">
+		</div>
+		<div class="col-auto">
+			<label for="plot" class="">plot</label>
+			<textarea  class="form-control" id="plot" placeholder="plot"></textarea>
+		</div>
+		<div class="col-auto">
+			<button type="button" class="btn btn-primary mb-3" id="send">Send Review</button>
+		</div>
+	</form>
+</div>
 
 
 </body>
-<script>
-let currentID = 0;
- function loadReviews(style) {
-	 fetch(`${movieUrl}`)
-		 .then((response) => response.json())
-		 // .then((data) => data.sort((a, b) => a.title.localeCompare(b.title)))
-		 .then((data) => {
-			 ////// raw, alpha, alphaR, rating, ratingR //////
-			 printData(data, style)
-		 })
-		 .then(() => {
-			 updateEventHandler();
-		 });
- }
 
-
-
-</script>
 <script src="js/requests.js"></script>
 <script>
-	emptyClean();
-	loadReviews();
+	// emptyClean();
+	let globalData =[]
+	let currentID = 0;
+	let info = loadReviews();
+	info.then((info) => printData(info, `raw`));
+	info.then((data)=> globalData = data);
+	console.log(info);
+
+	function testUniqeId(){
+		let idIndex = globalData.map(d => d.id)
+		idIndex = idIndex.sort();
+		console.log(idIndex[idIndex.length-1]+1);
+		return idIndex[idIndex-1]+1;
+	}
+	$(`#send`).click(testUniqeId)
 
 
 </script>
