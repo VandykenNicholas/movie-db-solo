@@ -40,9 +40,22 @@
 			<label for="genre" class="">genre</label>
 			<input type="text"  class="form-control" id="genre" placeholder="genre">
 		</div>
-		<div class="col-auto">
-			<label for="rating" class="">rating</label>
-			<input type="number" max="5" min="0" class="form-control" id="rating" placeholder="rating">
+		<div class="col-auto text-center">
+			<div class="btn-group dropend">
+				<button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+					Rating
+				</button>
+				<ul class="dropdown-menu" style="min-width: 0">
+					<li><button type="button" id="r5" class="dropdown-item bi-5-square-fill" ></button></li>
+					<li><button type="button" id="r4" class="dropdown-item bi-4-square-fill"></button></li>
+					<li><button type="button" id="r3" class="dropdown-item bi-3-square-fill"></button></li>
+					<li><button type="button" id="r2" class="dropdown-item bi-2-square-fill"></button></li>
+					<li><button type="button" id="r1" class="dropdown-item bi-1-square-fill"></button></li>
+				</ul>
+			</div>
+			<div class="col-auto text-center" id="insertR">
+
+			</div>
 		</div>
 		<div class="col-auto">
 			<label for="director" class="">Director</label>
@@ -70,6 +83,7 @@
 <script src="js/requests.js"></script>
 <script>
 	// emptyClean();
+	let ratingValue = 0;
 	let alpha = false;
 	let rating = false;
 	const selected = `text-bg-danger p-3`;
@@ -78,6 +92,32 @@
 	let info = loadReviews();
 	info.then((info) => printData(info, `raw`));
 	let global = [];
+
+	$(`#r5`).click(()=>{
+		$(`#insertR`).empty();
+		$(`#insertR`).append(`<h1 class="bi-5-square-fill"></h1>`);
+		ratingValue = 5;
+	})
+	$(`#r4`).click(()=>{
+		$(`#insertR`).empty();
+		$(`#insertR`).append(`<h1 class="bi-4-square-fill"></h1>`);
+		ratingValue = 4;
+	})
+	$(`#r3`).click(()=>{
+		$(`#insertR`).empty();
+		$(`#insertR`).append(`<h1 class="bi-3-square-fill"></h1>`);
+		ratingValue = 3;
+	})
+	$(`#r2`).click(()=>{
+		$(`#insertR`).empty();
+		$(`#insertR`).append(`<h1 class="bi-2-square-fill"></h1>`);
+		ratingValue = 2;
+	})
+	$(`#r1`).click(()=>{
+		$(`#insertR`).empty();
+		$(`#insertR`).append(`<h1 class="bi-1-square-fill"></h1>`);
+		ratingValue = 1;
+	})
 
 $(`#sortRating`).click(()=>{
 	if (!rating){

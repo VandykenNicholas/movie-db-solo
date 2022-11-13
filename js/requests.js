@@ -90,7 +90,7 @@ function sendData(){
 			const reviewObj = {
 				id: id,
 				title: $(`#title`).val(),
-				rating: $(`#rating`).val(),
+				rating: ratingValue,
 				plot: $(`#plot`).val(),
 				director: $(`#director`).val(),
 				genre: $(`#genre`).val()
@@ -193,6 +193,8 @@ function printData(data, style){
 	updateEventHandler();
 	$(`#bar`).removeClass(`invisible`);
 	$(`#bar`).addClass(`visible`);
+	$(`#insertR`).empty();
+	ratingValue = 0;
 	return data;
 }
 
