@@ -31,9 +31,42 @@ function emptyClean() {
 
 function updateEventHandler(){
 	$(`.click-me`).click(function (event){
-		currentID =  $(this).attr('id');
-		console.log(currentID);
+		if (currentID === 0){
+			currentID =  $(this).attr('id');
+			$(`#${currentID}`).removeClass(unselected);
+			$(`#${currentID}`).addClass(selected);
+		}
+		else if ($(this).attr('id') !== currentID){
+			$(`#${currentID}`).removeClass(selected);
+			$(`#${currentID}`).addClass(unselected);
+			currentID = $(this).attr('id');
+			$(`#${currentID}`).removeClass(unselected);
+			$(`#${currentID}`).addClass(selected);
+		}
+		else if ($(this).attr('id') === currentID){
+			$(`#${currentID}`).removeClass(selected);
+			$(`#${currentID}`).addClass(unselected);
+			currentID = 0;
+		}
 	});
+}
+
+
+function deleteRecord(id){
+	fetch(`${movieUrl}${id}`, {
+			method: `DELETE`, headers: {
+				'Content-Type': 'application/json',
+			}
+		}
+		
+	)
+		.then((data) => console.log(`Deleted ID of ${currentID} successfully`))
+	.then(() => {
+		return new Promise((resolve)=>{ setTimeout(() => {
+			resolve();}, 300);})})
+		.then((loadReviews))
+		.then((data)=> {printData(data, `raw`)
+		})
 }
 
 
@@ -63,7 +96,7 @@ function sendData(){
 				body: JSON.stringify(reviewObj),
 			};
 			fetch(url, options)
-				.then( response => console.log(response) ) /* review was created successfully */
+				.then( response => console.log(`${response}  ..... added the record of ID: ${id}`)) /* review was created successfully */
 				.catch( error => console.error(error) ); /* handle errors */
 		})
 		index.then(() => resolve())
@@ -123,7 +156,7 @@ function printData(data, style){
 		let rating = data.rating;
 		let director = data.director;
 		let plot = data.plot;
-			$(`#reviewBlock`).append(`<div class="row click-me" id="${data.id}">
+			$(`#reviewBlock`).append(`<div class="row click-me ${unselected}" id="${data.id}">
 											<div class="col-7">
 												<div class="row">
 													${title}

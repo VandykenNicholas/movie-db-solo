@@ -28,7 +28,7 @@
 			<input type="number" max="5" min="0" class="form-control" id="rating" placeholder="rating">
 		</div>
 		<div class="col-auto">
-			<label for="director" class="">movie</label>
+			<label for="director" class="">Director</label>
 			<input type="text"  class="form-control" id="director" placeholder="director">
 		</div>
 		<div class="col-auto">
@@ -50,6 +50,8 @@
 <script src="js/requests.js"></script>
 <script>
 	// emptyClean();
+	const selected = `text-bg-danger p-3`;
+	const unselected = `text-bg-light p-3`;
 	let currentID = 0;
 	let info = loadReviews();
 	info.then((info) => printData(info, `raw`));
@@ -65,9 +67,9 @@
 		.then((data)=> {printData(data, `raw`)
 	})});
 
-	// $(`#delete`).click(function(){
-	//
-	// })
+	$(`#delete`).click(function(){
+		deleteRecord(currentID);
+	})
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
