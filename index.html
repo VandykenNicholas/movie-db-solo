@@ -13,7 +13,10 @@
 <body>
 
 <div class="container" id="reviewBlock">
-<div class="row" id="bar">
+	<div class="row m-4 text-center">
+		<h1>Nick's Movie Reviews</h1>
+	</div>
+<div class="row mb-3" id="bar">
 <div class="col">
 	<button type="button" class="btn btn-labeled btn-primary" id="sortName">
 		<span class="btn-label"><i class="bi bi-arrow-down-up"></i></span> Name</button>
@@ -27,55 +30,79 @@
 			<span class="btn-label"><i class="bi bi-arrow-down-up"></i></span> Rating</button>
 	</div>
 </div>
-	<div class="d-flex justify-content-center bg-secondary d-none" id="loading" style="min-height: 40vh; --bs-bg-opacity: .3;">
-		<div class="spinner-border align-self-center "  role="status">
+	<div class=" d-none" id="loading" style="min-height: 40vh; --bs-bg-opacity: .3;">
+		<div class="tenor-gif-embed" data-postid="22164679" data-share-method="host" data-aspect-ratio="2" data-width="100%"><a href="https://tenor.com/view/forest-gump-wave-hi-hello-howdy-gif-22164679">Forest Gump Wave GIF</a>from <a href="https://tenor.com/search/forest+gump-gifs">Forest Gump GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+		<span class="spinner-border position-absolute top-50 start-50"  role="status">
 			<span class="visually-hidden">Loading...</span>
-		</div>
+
+		</span>
 	</div>
-<div class="row overflow-auto d-none" id="insertReviews" style="max-height: 40vh">
+<div class="row overflow-auto d-none " id="insertReviews" style="max-height: 40vh">
 
 </div>
 </div>
 <div class="container" id="common">
-	<form class="row g-3">
-		<div class="col-auto">
-			<label for="title" class="">Title</label>
-			<input type="text" class="form-control" id="title" placeholder="title">
-		</div>
-		<div class="col-auto">
-			<label for="genre" class="">genre</label>
-			<input type="text"  class="form-control" id="genre" placeholder="genre">
-		</div>
-		<div class="col-auto text-center">
-			<div class="btn-group dropend">
-				<button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-					Rating
-				</button>
-				<ul class="dropdown-menu" style="min-width: 0">
-					<li><button type="button" id="r5" class="dropdown-item bi-5-square-fill" ></button></li>
-					<li><button type="button" id="r4" class="dropdown-item bi-4-square-fill"></button></li>
-					<li><button type="button" id="r3" class="dropdown-item bi-3-square-fill"></button></li>
-					<li><button type="button" id="r2" class="dropdown-item bi-2-square-fill"></button></li>
-					<li><button type="button" id="r1" class="dropdown-item bi-1-square-fill"></button></li>
-				</ul>
-			</div>
-			<div class="col-auto text-center" id="insertR">
+<div class="col mt-4">
+	<button type="button" id="addReview" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+		Add a review
+	</button>
 
+</div>
+	<!-- Button trigger modal -->
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Lets Add A Review!</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form class="row g-3">
+						<div class="col-auto">
+							<label for="title" class="">Title</label>
+							<input type="text" class="form-control" id="title" placeholder="title">
+						</div>
+						<div class="col-auto">
+							<label for="genre" class="">genre</label>
+							<input type="text"  class="form-control" id="genre" placeholder="genre">
+						</div>
+						<div class="col-auto text-center">
+							<div class="btn-group dropend">
+								<button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+									Rating
+								</button>
+								<ul class="dropdown-menu" style="min-width: 0">
+									<li><button type="button" id="r5" class="dropdown-item bi-5-square-fill" ></button></li>
+									<li><button type="button" id="r4" class="dropdown-item bi-4-square-fill"></button></li>
+									<li><button type="button" id="r3" class="dropdown-item bi-3-square-fill"></button></li>
+									<li><button type="button" id="r2" class="dropdown-item bi-2-square-fill"></button></li>
+									<li><button type="button" id="r1" class="dropdown-item bi-1-square-fill"></button></li>
+								</ul>
+							</div>
+							<div class="col-auto text-center" id="insertR">
+
+							</div>
+						</div>
+						<div class="col-auto">
+							<label for="director" class="">Director</label>
+							<input type="text"  class="form-control" id="director" placeholder="director">
+						</div>
+						<div class="col-auto">
+							<label for="plot" class="">plot</label>
+							<textarea  class="form-control" id="plot" placeholder="plot"></textarea>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" id="send" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+				</div>
 			</div>
 		</div>
-		<div class="col-auto">
-			<label for="director" class="">Director</label>
-			<input type="text"  class="form-control" id="director" placeholder="director">
-		</div>
-		<div class="col-auto">
-			<label for="plot" class="">plot</label>
-			<textarea  class="form-control" id="plot" placeholder="plot"></textarea>
-		</div>
-	</form>
+	</div>
 	<div class="row mt-3">
-		<div class="col-auto">
-			<button type="button" class="btn btn-primary mb-3" id="send">Send Review</button>
-		</div>
 		<div class="col-auto">
 			<button type="button" class="invisible btn btn-primary mb-3" id="delete">Delete Review</button>
 		</div>
@@ -83,29 +110,6 @@
 	</div>
 </div>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-	Launch demo modal
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				...
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
-			</div>
-		</div>
-	</div>
-</div>
 </body>
 
 <script src="js/requests.js"></script>
@@ -180,6 +184,8 @@ $(`#sortName`).click(()=>{
 
 
 	$(`#send`).click(function(){
+		$(`#delete`).removeClass(`visible`);
+		$(`#delete`).addClass(`invisible`);
 		$(`#insertReviews`).addClass(`d-none`);
 		$(`#loading`).removeClass(`d-none`);
 	sendData().then(() =>{

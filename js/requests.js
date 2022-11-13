@@ -53,12 +53,16 @@ function updateEventHandler(){
 			$(`#delete`).removeClass(`invisible`)
 			$(`#bar`).addClass(`invisible`);
 			$(`#bar`).removeClass(`visible`);
+			$(`#insertReviews`).addClass(`overflow-hidden`)
+			$(`#addReview`).addClass(`invisible`);
 		}
 		else {
 			$(`#delete`).removeClass(`visible`)
 			$(`#delete`).addClass(`invisible`)
 			$(`#bar`).addClass(`visible`);
 			$(`#bar`).removeClass(`invisible`);
+			$(`#insertReviews`).removeClass(`overflow-hidden`);
+			$(`#addReview`).removeClass(`invisible`);
 		}
 	});
 }
@@ -163,6 +167,7 @@ function printData(data, style){
 		})
 	}
 	$(`#insertReviews`).empty();
+	$(`#addReview`).removeClass(`invisible`);
 	data.forEach(data => {
 		let title = data.title;
 		let genre = data.genre;
