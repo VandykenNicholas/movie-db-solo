@@ -36,6 +36,36 @@ function updateEventHandler(){
 	});
 }
 
+
+function sendData(){
+	return new Promise(function (resolve){
+		let index = uniqueId();
+		index.then((id) =>{
+			const reviewObj = {
+				id: id,
+				title: $(`#title`).val(),
+				rating: $(`#rating`).val(),
+				plot: $(`#plot`).val(),
+				director: $(`#director`).val(),
+				genre: $(`#genre`).val()
+			};
+			const url = movieUrl;
+			const options = {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(reviewObj),
+			};
+			fetch(url, options)
+				.then( response => console.log(response) ) /* review was created successfully */
+				.catch( error => console.error(error) ); /* handle errors */
+		})
+		index.then(() => resolve())
+	})
+}
+
+
 function printData(data, style){
 	if (style === `alpha`){
 		data = data.sort((a,b) => {
@@ -81,7 +111,7 @@ function printData(data, style){
 			return 0;
 		})
 	}
-	$(`#reviewBlock`).replaceWith(`<div class="container" id="reviewBlock"></div>`)
+	$(`#reviewBlock`).empty();
 	data.forEach(data => {
 		let title = data.title;
 		let genre = data.genre;
@@ -119,4 +149,16 @@ function loadReviews() {
 		.then((data) => {
 			return data
 		})
+}
+
+function uniqueId(){
+	return	 fetch(`${movieUrl}`)
+		.then((response) => response.json())
+		.then((data) => data.map(data => data.id))
+		.then((d) => d.sort())
+		.then((d) => d[d.length-1]+1)
+		.then((d) =>{
+			return d
+		} );
+	
 }
