@@ -48,6 +48,18 @@ function updateEventHandler(){
 			$(`#${currentID}`).addClass(unselected);
 			currentID = 0;
 		}
+		if (currentID !== 0){
+			$(`#delete`).addClass(`visible`)
+			$(`#delete`).removeClass(`invisible`)
+			$(`#bar`).addClass(`invisible`);
+			$(`#bar`).removeClass(`visible`);
+		}
+		else {
+			$(`#delete`).removeClass(`visible`)
+			$(`#delete`).addClass(`invisible`)
+			$(`#bar`).addClass(`visible`);
+			$(`#bar`).removeClass(`invisible`);
+		}
 	});
 }
 
@@ -67,6 +79,7 @@ function deleteRecord(id){
 		.then((loadReviews))
 		.then((data)=> {printData(data, `raw`)
 		})
+		
 }
 
 
@@ -149,15 +162,15 @@ function printData(data, style){
 			return 0;
 		})
 	}
-	$(`#reviewBlock`).empty();
+	$(`#insertReviews`).empty();
 	data.forEach(data => {
 		let title = data.title;
 		let genre = data.genre;
 		let rating = data.rating;
 		let director = data.director;
 		let plot = data.plot;
-			$(`#reviewBlock`).append(`<div class="row click-me ${unselected}" id="${data.id}">
-											<div class="col-7">
+			$(`#insertReviews`).append(`<div class="row click-me ${unselected}" id="${data.id}">
+											<div class="col-10">
 												<div class="row">
 													${title}
 												</div>
@@ -171,13 +184,15 @@ function printData(data, style){
 													${director}
 												</div>
 											</div>
-											<div class="col">
-													${rating}
+											<div class="col align-self-center text-center">
+											<h1 class="bi bi-${rating}-square-fill"></h1>
 											</div>
 										</div>`)
 
 	})
 	updateEventHandler();
+	$(`#bar`).removeClass(`invisible`);
+	$(`#bar`).addClass(`visible`);
 	return data;
 }
 

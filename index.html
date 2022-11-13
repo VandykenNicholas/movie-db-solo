@@ -5,13 +5,30 @@
 	<title>Best Review Site</title>
 	<script src="js/jquery.js"></script>
 	<script src="js/keys.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.1/font/bootstrap-icons.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
 	      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 
 </head>
 <body>
 <div class="container" id="reviewBlock">
+<div class="row" id="bar">
+<div class="col">
+	<button type="button" class="btn btn-labeled btn-primary" id="sortName">
+		<span class="btn-label"><i class="bi bi-arrow-down-up"></i></span> Name</button>
+</div>
+	<div class="col text-center">
+		<button type="button" class="btn btn-labeled btn-primary " id="refresh">
+			<span class="btn-label"><i class="bi bi-arrow-clockwise"></i></span> Refresh</button>
+	</div>
+	<div class="col text-end">
+		<button type="button" class="btn btn-labeled btn-primary " id="sortRating">
+			<span class="btn-label"><i class="bi bi-arrow-down-up"></i></span> Rating</button>
+	</div>
+</div>
+<div class="row overflow-auto " id="insertReviews" style="max-height: 40vh">
 
+</div>
 </div>
 <div class="container" id="common">
 	<form class="row g-3">
@@ -35,12 +52,15 @@
 			<label for="plot" class="">plot</label>
 			<textarea  class="form-control" id="plot" placeholder="plot"></textarea>
 		</div>
+	</form>
+	<div class="row mt-3">
 		<div class="col-auto">
 			<button type="button" class="btn btn-primary mb-3" id="send">Send Review</button>
 		</div>
-	</form>
-	<div class="col-auto">
-		<button type="button" class="btn btn-primary mb-3" id="delete">Delete Review</button>
+		<div class="col-auto">
+			<button type="button" class="invisible btn btn-primary mb-3" id="delete">Delete Review</button>
+		</div>
+
 	</div>
 </div>
 
@@ -50,6 +70,8 @@
 <script src="js/requests.js"></script>
 <script>
 	// emptyClean();
+	let alpha = false;
+	let rating = false;
 	const selected = `text-bg-danger p-3`;
 	const unselected = `text-bg-light p-3`;
 	let currentID = 0;
@@ -57,6 +79,34 @@
 	info.then((info) => printData(info, `raw`));
 	let global = [];
 
+$(`#sortRating`).click(()=>{
+	if (!rating){
+		printData(global, `rating`);
+		rating=true;
+	}
+	else {
+		printData(global, `ratingR`);
+		rating=false;
+	}
+})
+
+
+$(`#sortName`).click(()=>{
+	if (!alpha){
+		printData(global, `alpha`);
+		alpha=true;
+	}
+	else {
+		printData(global, `alphaR`);
+		alpha=false;
+	}
+})
+
+	$(`#refresh`).click(()=>{
+		let refresh = loadReviews()
+			refresh.then((data) => {printData(data, `raw`)
+			})
+	})
 
 
 	$(`#send`).click(function(){
@@ -69,6 +119,8 @@
 
 	$(`#delete`).click(function(){
 		deleteRecord(currentID);
+		$(`#delete`).removeClass(`visible`)
+		$(`#delete`).addClass(`invisible`)
 	})
 
 </script>
