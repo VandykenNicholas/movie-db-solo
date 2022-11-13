@@ -194,6 +194,9 @@ function printData(data, style){
 	$(`#bar`).removeClass(`invisible`);
 	$(`#bar`).addClass(`visible`);
 	$(`#insertR`).empty();
+	$(`#loading`).addClass(`d-none`);
+	$(`#insertReviews`).removeClass(`d-none`)
+	
 	ratingValue = 0;
 	return data;
 }
