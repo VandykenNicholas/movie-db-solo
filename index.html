@@ -53,15 +53,17 @@
 	let currentID = 0;
 	let info = loadReviews();
 	info.then((info) => printData(info, `raw`));
+	let global = [];
 
 
 
 	$(`#send`).click(function(){
-
 	sendData().then(() =>{
-		return loadReviews();
-	}).then((data)=> {printData(data, `raw`)
-	console.log(`3`)})});
+		return new Promise((resolve)=>{ setTimeout(() => {
+			resolve();}, 300);})})
+		.then((loadReviews))
+		.then((data)=> {printData(data, `raw`)
+	})});
 
 	// $(`#delete`).click(function(){
 	//

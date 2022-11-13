@@ -49,6 +49,11 @@ function sendData(){
 				director: $(`#director`).val(),
 				genre: $(`#genre`).val()
 			};
+			$(`#title`).val(``);
+			$(`#rating`).val(``);
+			$(`#plot`).val(``);
+			$(`#director`).val(``);
+			$(`#genre`).val(``);
 			const url = movieUrl;
 			const options = {
 				method: 'POST',
@@ -147,8 +152,10 @@ function loadReviews() {
 	return fetch(`${movieUrl}`)
 		.then((response) => response.json())
 		.then((data) => {
-			return data
+			global = data;
+			return data;
 		})
+	
 }
 
 function uniqueId(){
